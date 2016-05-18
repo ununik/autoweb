@@ -1,0 +1,22 @@
+#form_wrapper{
+	width: 550px;
+	margin: 0px auto;
+}
+#form_wrapper .form_input input{
+	width: 100%;
+}
+#form_wrapper .form_input textarea{
+	width: 100%;
+	min-height: 100px;
+}
+#form_wrapper .form_input label{
+	font-weight: bold;
+	font-size: 1.12em;
+}
+#form_wrapper .form_input p{
+	font-size: 0.82em;
+	margin: 0px;
+}
+#form_wrapper .form_input{
+	margin: 15px 0px;
+}
