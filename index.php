@@ -28,3 +28,32 @@ if (isset($_GET['page']) && $_GET['page'] == 'admin') {
 	print $html->getHTML();
 	return;	
 }
+
+//FRONT_END
+
+if (isset($_GET['pid'])) {
+	$pid = $_GET['pid'];
+} else {
+	$pid = '';
+}
+
+$page = new Page();
+$actualPageSettings = $page->getActualPage($pid);
+
+if (file_exists(CSS_FRONTEND)) {
+	$html->addCssFile('css/all.css');	
+}
+
+// FE HEADER
+$html->generateFEHeader(1);
+
+//CONTENT
+//headline
+$html->addToContent('<h1>'. $actualPageSettings['headline'] .'</h1>');
+//contentboxes
+include HOME_PATH . '/controllers/content.php';
+
+
+//FE FOOTER
+$html->generateFEFooter();
+print $html->getHTML();

@@ -1,3 +1,31 @@
+.addNewPage{
+	color: silver;
+	font-size: 12px;
+}
+.addNewPage a{
+	color: silver;
+	font-size: 12px;
+}
+.addNewPage:hover a{
+	color: black;
+}
+.button{
+	display: inline-block;
+	background-color: silver;
+	text-align: center;
+	padding: 3px 6px;
+	margin: 0px 2px;
+	border: 1px solid black;
+	border-radius: 5px;
+	outline: none;
+	color: black;
+	font-size: 0.85em;
+	text-decoration: none;
+	font-family: Sans-serif;
+}
+#content{
+	margin-left: 180px;
+}
 #form_wrapper{
 	width: 550px;
 	margin: 0px auto;
@@ -23,4 +51,23 @@
 #form_wrapper .form_input .long_textarea{
 	min-height: 550px;
 	font-size: 0.80em;
+}
+
+#navigation{
+	position: absolute;
+	top: 150px;
+	left: 0px;
+}
+.footerBlock{
+	width: 548px;
+	border: 1px dashed black;
+	padding: 10px;
+	margin: 15px 0px;
+}
+
+.obsah_type_wrapper{
+	max-width: 548px;
+	border: 1px dashed black;
+	padding: 10px;
+	margin: 15px 10px;
 }

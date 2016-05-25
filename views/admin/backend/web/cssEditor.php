@@ -1,5 +1,6 @@
 <?php
-$container = '<h2>Editace CSS</h2>';
+$container = '<h1>Web</h1>';
+$container .= '<h2>Editace CSS</h2>';
 $container .= '<div id="form_wrapper">';
 
 if (count($err) > 0) {
