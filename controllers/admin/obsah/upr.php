@@ -2,7 +2,7 @@
 if (!isset($_GET['contentId'])) {
 	return;
 }
-
+$html->addToScripts('<script src="models/library/tinymce/js/tinymce/tinymce.min.js"></script>');
 $actualContent = $obsah->getContent($_GET['contentId']);
 if (!isset($actualContent['id'])) {
 	return;

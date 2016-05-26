@@ -24,13 +24,25 @@ foreach ($contents as $content) {
 	}
 	
 	//WRAPPER
-	if ($content['type'] == 'wrapper') {				
-		foreach ($obsah->getAllContentForPID($pageValues['id'], $content['id']) as $contentChild) {
+	if ($content['type'] == 'wrapper') {
+		$child = $obsah->getAllContentForPID($pageValues['id'], $content['id']);	
+		$n = 0;			
+		foreach ($child as $contentChild) {
 			$container .= '<a href="?page=admin&action=obsah&part=new&id='.$_GET['id'].'&parent='.$content['id'].'&order='.$contentChild['order'].'">+</a>';
-
+			
+			$container .= '<div class="obsah_type_wrapper">';
+			if ($n != 0) {
+				$container .= '<button name="nahoru['. $contentChild['id'] .']" class="button">Posunout nahoru</button>';
+			}
+			if ($n != count($child)-1) {
+				$container .= '<button name="dolu['. $contentChild['id'] .']" class="button">Posunout dolu</button>';
+			}
+			$container .= '<a href="?page=admin&action=obsah&part=upr&id='.$_GET['id'].'&contentId='.$contentChild['id'].'" class="button">Upravit</a>';
+			$container .= '<button name="delete['. $contentChild['id'] .']" class="button">Smazat</button>';
+			
+			
 			//WRAPPER
 			if ($contentChild['type'] == 'wrapper') {
-				$container .= '<div class="obsah_type_wrapper">';
 				if ($contentChild['title'] != '') {
 					$container .= '<h2>'.$contentChild['title'].'</h2>';
 				}
@@ -38,7 +50,6 @@ foreach ($contents as $content) {
 			}
 			//TEXT
 			if ($contentChild['type'] == 'text') {	
-				$container .= '<div class="obsah_type_wrapper">';
 				if ($content['title'] != '') {
 					$container .= '<h2>'.$contentChild['title'].'</h2>';
 				}		
@@ -48,6 +59,7 @@ foreach ($contents as $content) {
 			
 				$container .= '</div>';
 			}
+			$n++;
 		}
 		$container .= '<a href="?page=admin&action=obsah&part=new&id='.$_GET['id'].'&parent='.$content['id'].'">+</a>';
 		$container .= '</div>';
