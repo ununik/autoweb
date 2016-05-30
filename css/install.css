@@ -1,6 +1,16 @@
+*{
+	font-family: Veranda, Arial, sans-serif;
+}
+body{
+	background-color: silver;
+}
 #form_wrapper{
 	width: 550px;
 	margin: 0px auto;
+	background-color: white;
+	border-radius: 5px;
+	border: 2px solid gray;
+	padding: 10px;
 }
 #form_wrapper .form_input input{
 	width: 100%;

@@ -1,6 +1,6 @@
 <?php
 $container = '<h1>Výběr typu obsahu pro '.$pageValues['headline'].'</h1>';
-$container .= '<h2>Text</h2>';
+$container .= '<h2>Kalendář</h2>';
 
 $container .= '<div id="form_wrapper">';
 
@@ -26,15 +26,7 @@ $container .= '<p>Class name (např. <u>Wrapper pro obrázek</u>)</p>';
 $container .= '<input type="text" name="class"  id="class" value="'.$class.'">';
 $container .= '</div>';
 
-$container .= '<div class="form_input">';
-$container .= '<label for="text">Text</label>';
-$container .= '<p>Hlavní obsah</p>';
-$container .= '<textarea name="text" id="text">'.$text.'</textarea>';
-$container .= '</div>';
-
-$container .= '<script>';
-$container .= TEXT_EDITOR_SCRIPT;
-$container .= '</script>';
+//TODO typ kalendare - denni, tydenni, mesicni, rocni
 
 $container .= '<input type="submit" value="Uložit" name="textForm">';
 

@@ -6,18 +6,18 @@ $contents = $obsah->getAllContentForPID($pageValues['id']);
 $container .= '<form action="" method="post">';
 
 foreach ($contents as $content) {
-	$container .= '<a href="?page=admin&action=obsah&part=new&id='.$_GET['id'].'&order='.$content['order'].'">+</a>';
+	$container .= '<a href="?page=admin&action=obsah&part=new&id='.$_GET['id'].'&order='.$content['order'].'" class="button pridat">+</a>';
 	$container .= '<div class="obsah_type_wrapper">';
 	
 	if ($i != 0) {
-		$container .= '<button name="nahoru['. $content['id'] .']" class="button">Posunout nahoru</button>';
+		$container .= '<button name="nahoru['. $content['id'] .']" class="button posunNahoru">Posunout nahoru</button>';
 	}
 	if ($i != count($contents)-1) {
-		$container .= '<button name="dolu['. $content['id'] .']" class="button">Posunout dolu</button>';
+		$container .= '<button name="dolu['. $content['id'] .']" class="button posunDolu">Posunout dolu</button>';
 	}
 	
-	$container .= '<a href="?page=admin&action=obsah&part=upr&id='.$_GET['id'].'&contentId='.$content['id'].'" class="button">Upravit</a>';
-	$container .= '<button name="delete['. $content['id'] .']" class="button">Smazat</button>';
+	$container .= '<a href="?page=admin&action=obsah&part=upr&id='.$_GET['id'].'&contentId='.$content['id'].'" class="button upravit">Upravit</a>';
+	$container .= '<button name="delete['. $content['id'] .']" class="button smazat">Smazat</button>';
 	
 	if ($content['title'] != '') {
 		$container .= '<h2>'.$content['title'].'</h2>';
@@ -28,17 +28,17 @@ foreach ($contents as $content) {
 		$child = $obsah->getAllContentForPID($pageValues['id'], $content['id']);	
 		$n = 0;			
 		foreach ($child as $contentChild) {
-			$container .= '<a href="?page=admin&action=obsah&part=new&id='.$_GET['id'].'&parent='.$content['id'].'&order='.$contentChild['order'].'">+</a>';
+			$container .= '<a href="?page=admin&action=obsah&part=new&id='.$_GET['id'].'&parent='.$content['id'].'&order='.$contentChild['order'].'" class="button pridat">+</a>';
 			
 			$container .= '<div class="obsah_type_wrapper">';
 			if ($n != 0) {
-				$container .= '<button name="nahoru['. $contentChild['id'] .']" class="button">Posunout nahoru</button>';
+				$container .= '<button name="nahoru['. $contentChild['id'] .']" class="button posunNahoru">Posunout nahoru</button>';
 			}
 			if ($n != count($child)-1) {
-				$container .= '<button name="dolu['. $contentChild['id'] .']" class="button">Posunout dolu</button>';
+				$container .= '<button name="dolu['. $contentChild['id'] .']" class="button posunDolu">Posunout dolu</button>';
 			}
-			$container .= '<a href="?page=admin&action=obsah&part=upr&id='.$_GET['id'].'&contentId='.$contentChild['id'].'" class="button">Upravit</a>';
-			$container .= '<button name="delete['. $contentChild['id'] .']" class="button">Smazat</button>';
+			$container .= '<a href="?page=admin&action=obsah&part=upr&id='.$_GET['id'].'&contentId='.$contentChild['id'].'" class="button upravit">Upravit</a>';
+			$container .= '<button name="delete['. $contentChild['id'] .']" class="button smazat">Smazat</button>';
 			
 			
 			//WRAPPER
@@ -61,7 +61,7 @@ foreach ($contents as $content) {
 			}
 			$n++;
 		}
-		$container .= '<a href="?page=admin&action=obsah&part=new&id='.$_GET['id'].'&parent='.$content['id'].'">+</a>';
+		$container .= '<a href="?page=admin&action=obsah&part=new&id='.$_GET['id'].'&parent='.$content['id'].'" class="button pridat">+</a>';
 		$container .= '</div>';
 	}
 	//TEXT
@@ -77,7 +77,7 @@ foreach ($contents as $content) {
 	$i++;
 }
 
-$container .= '<a href="?page=admin&action=obsah&part=new&id='.$_GET['id'].'">+</a>';
+$container .= '<a href="?page=admin&action=obsah&part=new&id='.$_GET['id'].'" class="button pridat">+</a>';
 $container .= '</form>';
 
 return $container;

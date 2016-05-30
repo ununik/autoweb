@@ -40,12 +40,24 @@ if (isset($_GET['pid'])) {
 $page = new Page();
 $actualPageSettings = $page->getActualPage($pid);
 
+if (!isset($actualPageSettings['id']) && isset($_SESSION['autoweb']) && $_SESSION['autoweb'] != '') {
+	$actualPageSettings = $page->getPage($pid);	
+	if (!isset($actualPageSettings['id'])) {
+		$html->addToContent('<h1>Tato sránka neexistuje</h1>');
+	} else {
+		$html->addToContent('<h1>Neaktivní stránka</h1>');
+	}
+} else if (!isset($actualPageSettings['id'])) {
+	$html->addToContent('<h1>Tato sránka neexistuje</h1>');
+}
+
 if (file_exists(CSS_FRONTEND)) {
 	$html->addCssFile('css/all.css');	
 }
 
 // FE HEADER
 $html->generateFEHeader(1);
+$html->generateFETitle($actualPageSettings['title']);
 
 //CONTENT
 //headline

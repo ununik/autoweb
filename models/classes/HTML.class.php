@@ -6,6 +6,7 @@ class HTML
 	private $_header = '';
 	private $_footer = '';
 	private $_scripts = '';
+	private $_title = '';
 	
 	/**
 	 * Adds a content to body in html.
@@ -33,12 +34,15 @@ class HTML
 	 */
 	public function getHTML()
 	{
-		$html = '<html>';
+		$html = '<!DOCTYPE html>';
+		$html .= '<html>';
 		$html .= '<head>';
+		//TODO: author, metapopis
 		$html .= '<meta charset="UTF-8">';
 		$html .= '<meta http-equiv="Content-language" content="cs">';
 		$html .= $this->_scripts;
 		$html .= $this->_cssFile;
+		$html .= '<title>' . $this->_title . '</title>';
 		$html .= '</head>';
 		$html .= '<body>';
 		$html .= $this->_header;
@@ -84,5 +88,20 @@ class HTML
 		$result .= '</div>';
 		
 		$this->_footer = $result;
+	}
+	
+	public function generateFETitle($title)
+	{
+		if (strlen($title) == 0) {
+			$result = Connection::connect()->prepare(
+					'SELECT `title` FROM `websettings_autoweb` WHERE `id`=1;'
+					);
+			$result->execute();
+			
+			$result = $result->fetch();
+			$title = $result['title'];
+		}
+		
+		$this->_title = $title;
 	}
 }

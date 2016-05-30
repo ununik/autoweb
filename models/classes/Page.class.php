@@ -21,8 +21,8 @@ class Page
 		
 		$result = Connection::connect()->prepare(
 				'UPDATE `pages_autoweb` SET `order`= 1 + `order` WHERE `deleted`=0 AND `parent`=:parent AND `order`>=:position;
-				 INSERT INTO `pages_autoweb`(`headline`, `title`, `parent`, `order`, `meta_description`, `active`) 
-				 VALUES (:headline, :title, :parent, :position, :metaDescription, 0);
+				 INSERT INTO `pages_autoweb`(`headline`, `title`, `parent`, `order`, `meta_description`, `active`, `timestamp_lastChange`, `timestamp_created`) 
+				 VALUES (:headline, :title, :parent, :position, :metaDescription, 0, :time, :time);
 				'
 		);
 		$result->execute(array(
@@ -30,21 +30,23 @@ class Page
 				':position' => $position,
 				':headline' => $headline,
 				':title' => $title,
-				':metaDescription' => $metaDescription
+				':metaDescription' => $metaDescription,
+				':time' => time()
 		));
 	}
 	
 	public function saveUpr($headline, $title, $metaDescription, $id)
 	{
 		$result = Connection::connect()->prepare(
-				'UPDATE `pages_autoweb` SET `headline`=:headline, `title`=:title, `meta_description`=:metaDescription WHERE `id`=:id;
+				'UPDATE `pages_autoweb` SET `headline`=:headline, `title`=:title, `meta_description`=:metaDescription, `timestamp_lastChange`=:time WHERE `id`=:id;
 				'
 		);
 		$result->execute(array(
 				':headline' => $headline,
 				':title' => $title,
 				':metaDescription' => $metaDescription,
-				':id' => $id
+				':id' => $id,
+				':time' => time()
 		));
 	}
 	
@@ -197,5 +199,10 @@ class Page
 				WHERE `id`=:id AND `deleted`=0 AND `parent`=:parent;'
 		);
 		$result->execute(array(':id'=>$id, ':order'=>$newOrder, ':parent'=>$parent, ':oldOrder' => $newOrder-1));
+	}
+	
+	public function generateLinkHref($id)
+	{
+		return '?pid='. $id;
 	}
 }

@@ -41,6 +41,8 @@ CREATE TABLE IF NOT EXISTS `pages_autoweb` (
   `title` varchar(255) COLLATE utf8_czech_ci NOT NULL,
   `parent` INT(20) NOT NULL DEFAULT '0',
   `order` INT(20) NOT NULL,
+  `timestamp_created` INT(20) NOT NULL DEFAULT '0',
+  `timestamp_lastChange` INT(20) NOT NULL DEFAULT '0',
   `meta_description` text NOT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1',
   `deleted` tinyint(1) NOT NULL DEFAULT '0', 
@@ -58,5 +60,7 @@ CREATE TABLE IF NOT EXISTS `content_autoweb` (
   `text` text NOT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1',
   `deleted` tinyint(1) NOT NULL DEFAULT '0', 
+  `timestamp_created` INT(20) NOT NULL DEFAULT '0',
+  `timestamp_lastChange` INT(20) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci AUTO_INCREMENT=1;

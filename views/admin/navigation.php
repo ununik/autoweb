@@ -7,6 +7,7 @@ $container .= '
 	</ul>
 </li>';
 $container .= '<li><a href="?page=admin&action=hlavicka">Hlavička</a></li>';
+$container .= '<li><a href="?page=admin&action=menu">Menu</a></li>';
 $container .= '<li><a href="?page=admin&action=stranky">Stránky</a></li>';
 $container .= '<li><a href="?page=admin&action=paticka">Patička</a></li>';
 $container .= '<li><a href="?page=admin&action=akualizace">Aktualizace</a></li>';

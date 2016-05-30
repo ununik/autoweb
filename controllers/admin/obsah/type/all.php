@@ -76,6 +76,11 @@ switch($_GET['type']) {
 		$html->addToContent(include HOME_PATH . '/views/admin/backend/obsah/type/text.php');
 		return;
 		break;
+	case 'kalendar':
+		$html->addToScripts('<script src="models/library/tinymce/js/tinymce/tinymce.min.js"></script>');
+		$html->addToContent(include HOME_PATH . '/views/admin/backend/obsah/type/kalendar.php');
+		return;
+		break;
 }
 
 $html->addToContent(include HOME_PATH . '/views/admin/backend/obsah/type/all.php');

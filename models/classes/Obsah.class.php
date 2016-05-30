@@ -28,8 +28,8 @@ class Obsah
 		
 		$result = Connection::connect()->prepare(
 				'UPDATE `content_autoweb` SET `order` = `order` + 1 WHERE `order` > :orderOld;
-				 INSERT INTO `content_autoweb`(`pid`, `type`, `title`, `parent`, `order`, `text`, `active`, `class`) 
-				 VALUES (:pid, :type, :title, :parent, :order, :text, 0, :class);
+				 INSERT INTO `content_autoweb`(`pid`, `type`, `title`, `parent`, `order`, `text`, `active`, `class`, `timestamp_lastChange`, `timestamp_created`) 
+				 VALUES (:pid, :type, :title, :parent, :order, :text, 0, :class, :time, :time);
 				'
 		);
 		$result->execute(array(
@@ -40,7 +40,8 @@ class Obsah
 				':type' => $type,
 				':title' => $title,
 				':text' => $text,
-				':class' => $class
+				':class' => $class,
+				':time' => time()
 			));
 	}
 	
@@ -48,14 +49,15 @@ class Obsah
 	{
 	
 		$result = Connection::connect()->prepare(
-				'UPDATE `content_autoweb` SET `title`=:title, `text`=:text, `class`=:class WHERE `id`=:id;
+				'UPDATE `content_autoweb` SET `title`=:title, `text`=:text, `class`=:class, `timestamp_lastChange`=:time WHERE `id`=:id;
 				'
 		);
 		$result->execute(array(
 				':id' => $id,
 				':title' => $title,
 				':text' => $text,
-				':class' => $class
+				':class' => $class,
+				':time' => time()
 		));
 	}
 	
