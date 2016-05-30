@@ -26,9 +26,18 @@ class Obsah
 			$order = count($this->getAllContentForPID($pid, $parent)) + 1;
 		}
 		
-		$result = Connection::connect()->prepare(
-				'UPDATE `content_autoweb` SET `order` = `order` + 1 WHERE `order` > :orderOld;
-				 INSERT INTO `content_autoweb`(`pid`, `type`, `title`, `parent`, `order`, `text`, `active`, `class`, `timestamp_lastChange`, `timestamp_created`) 
+		$db = Connection::connect();
+		
+		$result = $db->prepare(
+		        'UPDATE `content_autoweb` SET `order` = `order` + 1 WHERE `order` > :orderOld;
+				'
+		        );
+		$result->execute(array(
+				':orderOld' => $order-1
+			));
+		
+		$result = $db->prepare(
+				'INSERT INTO `content_autoweb`(`pid`, `type`, `title`, `parent`, `order`, `text`, `active`, `class`, `timestamp_lastChange`, `timestamp_created`) 
 				 VALUES (:pid, :type, :title, :parent, :order, :text, 0, :class, :time, :time);
 				'
 		);
@@ -43,6 +52,8 @@ class Obsah
 				':class' => $class,
 				':time' => time()
 			));
+		
+		return $db->lastInsertId();
 	}
 	
 	public function uprContent($id, $title = '', $text = '', $class = '')
@@ -83,6 +94,28 @@ class Obsah
 				$content .= '</div>';
 				return $content;
 				break;
+			case 'calendar':
+			    $result = Connection::connect()->prepare(
+			            'SELECT * FROM `calendar_autoweb` WHERE `content_id`=:id;'
+			            );
+			    $result->execute(array(':id' => $contentArray['id']));
+			    
+			    $calendar = $result->fetch();
+			    
+			    if (!isset($_GET['time'])) {
+			        $calendarClass = new Calendar(time(), $calendar['id']);
+			    } else {
+			        $calendarClass = new Calendar($_GET['time'], $calendar['id']);
+			    }
+			    
+			    switch($calendar['type']) {
+			        case 'month':
+			            $content .= $calendarClass->createMothCalendar();
+			            break;
+			    }
+			    $content .= '</div>';
+			    return $content;
+			    break;
 		}
 		return '';
 	}
@@ -135,5 +168,35 @@ class Obsah
 				'
 		);
 		$result->execute(array(':id'=>$id, ':parent'=>$block['parent'], ':orderOld'=>$block['order']));
+	}
+	
+	public function setCalendarType($id, $type, $specification)
+	{
+	    $result = Connection::connect()->prepare(
+	            'INSERT INTO `calendar_autoweb`(`content_id`, `type`, `specification`) VALUES (:id, :type, :specification);
+				'
+	            );
+	    $result->execute(array(
+	            ':id' => $id,
+	            ':type' => $type,
+	            ':specification' => $specification
+	    ));
+	}
+	
+	public function getCalendarType($id)
+	{
+	    $result = Connection::connect()->prepare(
+	            'SELECT * FROM `calendar_autoweb` WHERE `content_id`=:id;'
+	            );
+	    $result->execute(array(':id' => $id));
+	     
+	    return $result->fetch();
+	}
+	public function updateCalendarType($id, $type, $specification)
+	{
+	    $result = Connection::connect()->prepare(
+	            'UPDATE `calendar_autoweb` SET `type`=:type, `specification`=:spec  WHERE `content_id`=:id;'
+	            );
+	    $result->execute(array(':id' => $id, ':type'=>$type, ':spec'=>$specification));
 	}
 }

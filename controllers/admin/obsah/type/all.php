@@ -77,8 +77,45 @@ switch($_GET['type']) {
 		return;
 		break;
 	case 'kalendar':
+	    $title = '';
+	    $class = '';
+	    $type = 'month';
+	    $specification = '';
+	    
+	    if (isset($_POST['calendarForm'])) {
+	        $title = \Library\fce\safeText($_POST['title']);
+	        $class = \Library\fce\safeText($_POST['class']);
+	        $type = \Library\fce\safeText($_POST['type']);
+	        
+	        if (strlen($title) > 255) {
+	            $err[] = 'Příliš dlouhý titulek';
+	        }
+	        if (strlen($class) > 255) {
+	            $err[] = 'Příliš dlouhý název třídy.';
+	        }
+	        if (strlen($type) == 0) {
+	            $err[] = 'Není vybraný typ kalendáře.';
+	        }
+	        
+	        if (count($err) == 0) {
+	            $parent = 0;
+	            if (isset($_GET['parent'])) {
+	                $parent = $_GET['parent'];
+	            }
+	            $order = 0;
+	            if (isset($_GET['order'])) {
+	                $order = $_GET['order'];
+	            }
+	            	
+	            $contentId = $obsah->saveNewContent($_GET['id'], 'calendar', $parent, $order, $title, '', $class);
+	            $obsah->setCalendarType($contentId, $type, $specification);
+	            
+	            header('Location: ?page=admin&action=obsah&id='.$_GET['id']);
+	        }
+	    }
+	    
 		$html->addToScripts('<script src="models/library/tinymce/js/tinymce/tinymce.min.js"></script>');
-		$html->addToContent(include HOME_PATH . '/views/admin/backend/obsah/type/kalendar.php');
+		$html->addToContent(include HOME_PATH . '/views/admin/backend/obsah/type/calendar.php');
 		return;
 		break;
 }

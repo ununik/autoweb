@@ -59,6 +59,13 @@ foreach ($contents as $content) {
 			
 				$container .= '</div>';
 			}
+			
+			//KALENDAR
+			if ($content['type'] == 'calendar') {
+			    $container .= 'kalendar';
+			
+			    $container .= '</div>';
+			}
 			$n++;
 		}
 		$container .= '<a href="?page=admin&action=obsah&part=new&id='.$_GET['id'].'&parent='.$content['id'].'" class="button pridat">+</a>';
@@ -71,6 +78,13 @@ foreach ($contents as $content) {
 		}
 		
 		$container .= '</div>';
+	}
+	
+	//KALENDAR
+	if ($content['type'] == 'calendar') {
+	        $container .= 'kalendar';
+	
+	    $container .= '</div>';
 	}
 
 	

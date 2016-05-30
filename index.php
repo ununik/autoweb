@@ -32,16 +32,16 @@ if (isset($_GET['page']) && $_GET['page'] == 'admin') {
 //FRONT_END
 
 if (isset($_GET['pid'])) {
-	$pid = $_GET['pid'];
+	define('PID', $_GET['pid']);
 } else {
-	$pid = '';
+	define('PID', '');
 }
 
 $page = new Page();
-$actualPageSettings = $page->getActualPage($pid);
+$actualPageSettings = $page->getActualPage(PID);
 
 if (!isset($actualPageSettings['id']) && isset($_SESSION['autoweb']) && $_SESSION['autoweb'] != '') {
-	$actualPageSettings = $page->getPage($pid);	
+	$actualPageSettings = $page->getPage(PID);	
 	if (!isset($actualPageSettings['id'])) {
 		$html->addToContent('<h1>Tato sránka neexistuje</h1>');
 	} else {

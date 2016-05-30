@@ -64,3 +64,11 @@ CREATE TABLE IF NOT EXISTS `content_autoweb` (
   `timestamp_lastChange` INT(20) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci AUTO_INCREMENT=1;
+
+CREATE TABLE IF NOT EXISTS `calendar_autoweb` (
+  `id` int(15) NOT NULL AUTO_INCREMENT,
+  `content_id` INT(20) NOT NULL DEFAULT '0',
+  `type` varchar(255) COLLATE utf8_czech_ci NOT NULL,
+  `specification` varchar(255) COLLATE utf8_czech_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci AUTO_INCREMENT=1;

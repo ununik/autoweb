@@ -127,13 +127,16 @@ body{
 	position: relative;
 	left: -180px;
 	margin: 0px auto;	
-	background-color: white;
+	background-color: gray;
 	border-radius: 5px;
 	border: 2px solid gray;
 	padding: 10px;
 }
 #form_wrapper .form_input input{
 	width: 100%;
+}
+#form_wrapper .form_input .radioForm{
+	width: 30px;
 }
 #form_wrapper .form_input textarea{
 	width: 100%;
