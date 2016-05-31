@@ -63,6 +63,7 @@ foreach ($contents as $content) {
 			//KALENDAR
 			if ($content['type'] == 'calendar') {
 			    $container .= 'kalendar';
+			    $container .= '<a href="?page=admin&action=udalosti">události</a>';
 			
 			    $container .= '</div>';
 			}
@@ -83,6 +84,7 @@ foreach ($contents as $content) {
 	//KALENDAR
 	if ($content['type'] == 'calendar') {
 	        $container .= 'kalendar';
+	        $container .= '<a href="?page=admin&action=udalosti">události</a>';
 	
 	    $container .= '</div>';
 	}

@@ -72,3 +72,14 @@ CREATE TABLE IF NOT EXISTS `calendar_autoweb` (
   `specification` varchar(255) COLLATE utf8_czech_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci AUTO_INCREMENT=1;
+
+CREATE TABLE IF NOT EXISTS `event_autoweb` (
+  `id` int(15) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8_czech_ci NOT NULL,
+  `date1` INT(20) NOT NULL DEFAULT '0',
+  `date2` INT(20) NOT NULL DEFAULT '0',
+  `place` varchar(255) COLLATE utf8_czech_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8_czech_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci AUTO_INCREMENT=1;
+

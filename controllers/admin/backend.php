@@ -45,6 +45,11 @@ if (isset($_GET['action'])) {
 			include HOME_PATH . '/controllers/admin/paticka.php';
 			return;
 			break;
+		case 'udalosti':
+		    $html->addToContent(include HOME_PATH . '/views/admin/navigation.php');
+		    include HOME_PATH . '/controllers/admin/udalosti.php';
+	        return;
+	        break;
 	}
 }
 

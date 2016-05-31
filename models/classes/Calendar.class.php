@@ -72,7 +72,12 @@ class Calendar
                 $calendar .= ' calendar_today';
             }
             $calendar .= '">';
-            $calendar .= $i;
+            $calendar .= '<div class="calendar_dayNumber">'.$i.'</div>';
+            foreach (Udalost::getEventForTime($todayTimestamp, $todayTimestamp+86400) as $event) {
+                $calendar .= '<div class="calendar_titleEvent">';
+                $calendar .= $event['title'];
+                $calendar .= '</div>';
+            }
             $calendar .= '</td>';
             $n++;
         }
